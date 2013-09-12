@@ -1,10 +1,6 @@
-/**
- * Insert a script into the DOM
- *
- * @param {string} URL of script
- * @param {function} Optional callback
- */
-var AppendScript = function (src, callback) {
+var Slides = {}
+
+Slides.appendScript = function (src, callback) {
   var script = document.createElement( 'script' )
   script.type = 'text/javascript'
   script.src = src
@@ -13,13 +9,33 @@ var AppendScript = function (src, callback) {
   document.getElementsByTagName('head')[0].appendChild(script)
 }
 
-AppendScript('bootstrap/js/jquery-1.10.2.min.js', function () {
-  AppendScript('bootstrap/js/bootstrap.min.js', function () {
-    AppendScript('space.js', function () {
+Slides.url = 'http://slides.nudgepad.com/'
+
+Slides.template = '<div id="carousel-example-generic" class="carousel slide" style="display: none;">\
+  <!-- Indicators -->\
+  <ol class="carousel-indicators">\
+  </ol>\
+\
+  <!-- Wrapper for slides -->\
+  <div class="carousel-inner">\
+  </div>\
+\
+  <!-- Controls -->\
+  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">\
+    <span class="icon-prev"></span>\
+  </a>\
+  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">\
+    <span class="icon-next"></span>\
+  </a>\
+</div>'
+
+Slides.appendScript(Slides.url + 'bootstrap/js/jquery-1.10.2.min.js', function () {
+  Slides.appendScript(Slides.url + 'bootstrap/js/bootstrap.min.js', function () {
+    Slides.appendScript(Slides.url + 'space.js', function () {
       $('body').append('<meta name="viewport" content="width=device-width, initial-scale=1.0">')
-      $('body').append('<link href="bootstrap/css/bootstrap.css" rel="stylesheet">')
-      $('body').append('<link href="style.css" rel="stylesheet">')
-      $('body').append(template)
+      $('body').append('<link href="' + Slides.url + 'bootstrap/css/bootstrap.css" rel="stylesheet">')
+      $('body').append('<link href="' + Slides.url + 'style.css" rel="stylesheet">')
+      $('body').append(Slides.template)
       var slides = new Space($('#slideshow').html())
       var i = 0
       if (slides.get('options title'))
@@ -61,23 +77,4 @@ AppendScript('bootstrap/js/jquery-1.10.2.min.js', function () {
     })
   })
 })
-
-
-var template = '<div id="carousel-example-generic" class="carousel slide" style="display: none;">\
-  <!-- Indicators -->\
-  <ol class="carousel-indicators">\
-  </ol>\
-\
-  <!-- Wrapper for slides -->\
-  <div class="carousel-inner">\
-  </div>\
-\
-  <!-- Controls -->\
-  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">\
-    <span class="icon-prev"></span>\
-  </a>\
-  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">\
-    <span class="icon-next"></span>\
-  </a>\
-</div>'
 
