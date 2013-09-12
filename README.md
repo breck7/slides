@@ -14,7 +14,7 @@ Examples
 ### Basic Example
 
 ```
-<script src="slides.js"></script>
+<script src="http://slides.nudgepad.com/slides.js"></script>
 <template id="slideshow" style="display: none;">
 options
  title Slides
